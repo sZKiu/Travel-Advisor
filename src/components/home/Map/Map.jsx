@@ -17,7 +17,7 @@ function Map({
     <div className="w-[60%]">
       {coords.lat === 0 ? null : (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyBUoBRAhpgOG3zD6_gtBqUBNqmZRP1MEik" }}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
           center={coords}
           defaultZoom={14}
           margin={[50, 50, 50, 50]}

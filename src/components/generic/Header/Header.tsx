@@ -1,19 +1,20 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Autocomplete } from "@react-google-maps/api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCoords } from "@/redux/slices/coordsSlice";
 import { RxMagnifyingGlass } from "react-icons/rx";
 
 function Header() {
+  const coords = useSelector((state: any) => state.coords);
   const dispatch = useDispatch();
   const [autocomplete, setAutocomplete] =
     useState<google.maps.places.Autocomplete>();
   const [isGoogle, setIgGoogle] = useState(false);
 
   useEffect(() => {
-    setIgGoogle(true);
-  }, []);
+    if (typeof google !== "undefined") setIgGoogle(true);
+  }, [coords]);
 
   const onLoad = (autoC: any) => setAutocomplete(autoC);
 
@@ -32,9 +33,9 @@ function Header() {
   };
 
   return (
-    <header className="bg-[#2444b7] sticky top-0 p-4 grid grid-flow-col justify-between items-center">
+    <header className="bg-[#2444b7] sticky top-0 py-4 px-6 grid grid-flow-col justify-between items-center">
       <div className="text-white text-xl">
-        <h2>Travel Advisor</h2>
+        <h2 className="cursor-pointer">Travel Advisor</h2>
       </div>
 
       <div className="flex items-center justify-end gap-4">
@@ -42,26 +43,28 @@ function Header() {
 
         {isGoogle ? (
           <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
-            <div className="flex gap-2 items-center bg-white/30 backdrop-blur-lg rounded-md px-2 py-[0.15rem]">
+            <div className="flex gap-2 items-center bg-white/30 backdrop-blur-lg rounded-sm px-2 py-[0.10rem]">
               <RxMagnifyingGlass className="text-white text-xl" />
 
               <input
                 type="text"
-                className="bg-transparent text-white outline-none  placeholder:text-white/50 placeholder:font-light"
+                className="bg-transparent text-white outline-none placeholder:text-white/50 placeholder:font-light text-base"
                 placeholder="Search..."
               />
             </div>
           </Autocomplete>
         ) : (
-          <div className="flex gap-2 items-center bg-white/30 backdrop-blur-lg rounded-md px-2 py-[0.15rem] w-[50%]">
-            <RxMagnifyingGlass className="text-white text-xl" />
+          <div>
+            <div className="flex gap-2 items-center bg-white/30 backdrop-blur-lg rounded-sm px-2 py-[0.10rem]">
+              <RxMagnifyingGlass className="text-white text-xl" />
 
-            <input
-              disabled
-              type="text"
-              className="bg-transparent text-white outline-none placeholder:text-white/50 placeholder:font-light"
-              placeholder="Search..."
-            />
+              <input
+                disabled
+                type="text"
+                className="bg-transparent text-white outline-none placeholder:text-white/50 placeholder:font-light text-base"
+                placeholder="Search..."
+              />
+            </div>
           </div>
         )}
       </div>
