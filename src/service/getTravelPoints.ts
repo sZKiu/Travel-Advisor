@@ -1,8 +1,8 @@
 export default function getTravelPoints(data: any) {
   let newData = data.map((el: any, i: number) => {
-    if (el.address) {
+    if (el.rating) {
       return {
-        address: el.address,
+        address: el.address ?? el.location_string,
         isClosed: el.open_now_text,
         rating: el.rating,
         name: el.name,

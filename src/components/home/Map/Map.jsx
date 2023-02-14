@@ -5,11 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCoords } from "@/redux/slices/coordsSlice";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 
-function Map({
-  setBounds,
-  data,
-  setScrollView,
-}) {
+import mapStyles from "./mapsStyles";
+
+function Map({ setBounds, data, setScrollView }) {
   const coords = useSelector((state) => state.coords);
   const dispatch = useDispatch();
 
@@ -17,11 +15,15 @@ function Map({
     <div className="w-[60%]">
       {coords.lat === 0 ? null : (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
+          bootstrapURLKeys={{ key: "AIzaSyBUoBRAhpgOG3zD6_gtBqUBNqmZRP1MEik" }}
           center={coords}
           defaultZoom={14}
           margin={[50, 50, 50, 50]}
-          // options={""}
+          options={{
+            disableDefaultUI: true,
+            zoomControl: true,
+            styles: mapStyles,
+          }}
           onChange={(e) => {
             dispatch(
               setCoords({

@@ -204,8 +204,8 @@ function List({
                         <BiMap className="text-2xl" />
 
                         <p
-                          className={`text-sm text-gray-600 ${
-                            el.address.length > 60 ? "text-[0.6rem]" : "text-sm"
+                          className={`text-gray-600 ${
+                            el.address.length > 56 ? "text-[0.60rem]" : el.address.length > 40 ? "text-xs" : "text-sm"
                           }`}
                         >
                           {el.address}

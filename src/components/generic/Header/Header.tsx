@@ -11,6 +11,7 @@ function Header() {
   const [autocomplete, setAutocomplete] =
     useState<google.maps.places.Autocomplete>();
   const [isGoogle, setIgGoogle] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     if (typeof google !== "undefined") setIgGoogle(true);
@@ -23,6 +24,7 @@ function Header() {
       const lat = autocomplete.getPlace()?.geometry?.location?.lat();
       const lng = autocomplete.getPlace()?.geometry?.location?.lng();
 
+      setInputValue("");
       dispatch(
         setCoords({
           lat,
@@ -47,6 +49,8 @@ function Header() {
               <RxMagnifyingGlass className="text-white text-xl" />
 
               <input
+                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValue}
                 type="text"
                 className="bg-transparent text-white outline-none placeholder:text-white/50 placeholder:font-light text-base"
                 placeholder="Search..."
