@@ -14,7 +14,7 @@ function Header() {
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    if (typeof google !== "undefined") setIgGoogle(true);
+      if (typeof google !== "undefined") setIgGoogle(true);
   }, [coords]);
 
   const onLoad = (autoC: any) => setAutocomplete(autoC);
