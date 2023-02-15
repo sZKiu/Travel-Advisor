@@ -11,9 +11,7 @@ function Map({ setBounds, data, setScrollView }) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsReady(true);
-    }, 2000);
+    setIsReady(true);
   }, []);
 
   return (
